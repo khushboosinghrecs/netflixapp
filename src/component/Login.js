@@ -6,7 +6,7 @@ import { auth } from '../utills/firebase';
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux';
 import { addUser, removeUser } from '../utills/userSlilce'
-
+import {userURL} from '../utills/constant';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -29,7 +29,8 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name.current.value, photoURL: "https://avatars.githubusercontent.com/u/41840494?v=4"
+            displayName: name.current.value,
+             photoURL: userURL
           }).then(() => {
             const { uid, email, displayName, photoURL } = auth.currentUser;
             dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }))
@@ -74,8 +75,8 @@ const Login = () => {
         <input ref={password} type="password" placeholder='password' className='text-sm p-2 my-2 bg-gray-70 w-full' />
         <p className='p-4 my-4 text-red-700'>{errorMessage}</p>
         <button className='p-4 my-4 bg-red-700 rounded-lg text-sm text-white' onClick={handleForm}>{isSignInForm ? "Sign In" : "Sign Up"}</button>
+        <p className='text-[14px] text-white' onClick={toggleSignInForm}>{!isSignInForm ? "New to NetFlix? Sign up now" : "Already Registered Sign In"}</p>
       </form>
-      <p className='text-[14px] text-white' onClick={toggleSignInForm}>{isSignInForm ? "New to NetFlix? Sign up now" : "Already Registered Sign In"}</p>
 
     </>
   )
