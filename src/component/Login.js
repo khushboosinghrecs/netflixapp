@@ -37,7 +37,7 @@ const Login = () => {
           }).catch((error) => {
             setIsErrorMessage(error.message);
           });
-          console.log(user);
+   
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -59,7 +59,7 @@ const Login = () => {
         });
     }
     setIsErrorMessage(message);
-    console.log(email.current.value, password.current.value)
+ 
   }
   // useRef used to reference to value
   return (
